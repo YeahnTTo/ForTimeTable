@@ -22,7 +22,7 @@
     <style>
         table {margin-bottom: 30px;}
         table th {text-align: center;}
-        table th, table td {word-break: break-word}
+        table th, table td {word-break: break-word; text-align: center;}
         table td.hide {display: none;}
         #set-table {margin-top: 20px; width: 100%}
     </style>
@@ -30,9 +30,10 @@
 <body>
 <h1 class="p-5 text-center">시간표와 인강의 연결고리</h1>
 <div class="form-group float-right mr-3">
-    <button type="button" class="btn btn-sm btn-success" onclick="htmlDownload()">저장</button>
+    <button type="button" class="btn btn-sm btn-success" id="btn-down">저장</button>
+    <a id="table-download" download="table.html"></a>
 </div>
-    <table class="table table-bordered mb-15">
+    <table class="table table-bordered mb-15" id="time-table">
         <colgroup>
             <col width="10%">
             <col width="15%">
@@ -168,7 +169,7 @@
         <div class="col-12">
             <div class="form-group">
                 <label for="input-name">연결 링크</label>
-                <input type="text" class="form-control" id="input-link" value="https://naver.com" placeholder="연결 할 링크를 입력해주세요.">
+                <input type="text" class="form-control" id="input-link" value="https://" placeholder="연결 할 링크를 입력해주세요.">
             </div>
         </div>
     </div>
