@@ -108,11 +108,13 @@ function input_col_text(col_id, name, link=null) {
     let regx = new RegExp(/(http(s)?:\/\/)([a-z0-9\w]+\.*)+[a-z0-9]{2,4}/gi);
 
     if(link){
-        if(regx.test(link)){
-
-            $(col_id).append("<div onclick='window.open(\""+link+"\")'>"+name+"</div>");
+        if(link.match(/^http([s]?):\/\/.*/)){
+            if(link.length>8) {
+                $(col_id).append("<div onclick='window.open(\""+link+"\")'>"+name+"</div>");
+            } else {
+                $(col_id).append("<div>"+name+"</div>");
+            }
         } else {
-
             $(col_id).append("<div onclick='window.open(\"https://"+link+"\")'>"+name+"</div>");
         }
     } else {
@@ -155,8 +157,21 @@ function remove_rowspan(_day, start_t, end_t, time_gap) {
 }
 
 function htmlDownload() {
-    $("#table-download").attr( "href", "https://yeahntto.github.io/ForTimeTable/").get(0).click();
-    $("#table-download").trigger('click');
+    /*$("#table-download").attr( "href", "https://yeahntto.github.io/ForTimeTable/").get(0).click();
+    $("#table-download").trigger('click');*/
+    let content = $("html").html();
+    let container_html = '';
+    let btn_html = '';
+    $(".container").hide();
+    $("#btn-wrap").hide();
+    let contentType = 'application/octet-stream';
+    let a = document.createElement('a');
+    let blob = new Blob([ $("html").html()], {'type':contentType});
+    a.href = window.URL.createObjectURL(blob);
+    a.download = "table.html";
+    a.click();
 
+    $(".container").show();
+    $("#btn-wrap").show();
 
 }
