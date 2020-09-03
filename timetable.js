@@ -33,6 +33,13 @@ $(function () {
             return false;
         }
 
+        // 시작시간 종료시간 체크
+        if(start_t > end_t) {
+            alert("종료시간이 시작시간보다 일찍일 수는 없다.");
+            $("#select-end-time").focus();
+            return false;
+        }
+
         // 입력할 컬럼 아이디 생성
         let col_id = "#"+_day+"-"+start_t;
         if(start_t < end_t) {
@@ -40,8 +47,6 @@ $(function () {
         }
         
         // 시간 겹침 체크
-        console.log($(col_id).hasClass('hide'));
-        console.log( $(col_id).attr('rowspan'));
         if($(col_id).hasClass('hide') || $(col_id).attr('rowspan') > 0 || $(col_id).text().length > 0) {
             if(confirm("시간 겹침. 그래도 입력 할테냐?")){
                 if($(col_id).text().length > 0){
